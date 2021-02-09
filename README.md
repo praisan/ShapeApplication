@@ -1,20 +1,10 @@
-# ShapeApplication
-
-## สารบัญ 
-* ก้าวที่ 1 Class-Object <br>
-https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
-
-* ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน <br>
-https://github.com/praisan/ShapeApplication/tree/dc0df02dcc6b6a1ff95e99dc2c0878f8f68e2e33
-
-# เรื่องราวการออกแบบ
-## ก้าวที่ 1 Class-Object
-
-https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
+# เรื่องราวการออกแบบ ShapeApplication
 
 ปิติ ต้องการออกแบบโปรแกรมสำหรับไว้ใช้ในการวาดรูปทรงต่าง ๆ
 แต่ละรูปทรงสามารถเติมสีได้ รวมถึงสามารถคำนวณพื้นที่ และเส้นรอบรูปได้
 และอาจมีการคำนาณคุณสมบัติอื่นของรูปทรงนั้น ๆ
+
+## ก้าวที่ 1 Class-Object
 
 ปิติเริ่มจากออกแบบคลาส Circle ที่สามารถจดจำสีและรัศมีของวงกลมได้ สามารถเปลี่ยนแปลงได้ในภายหลังหากต้องการ
 นอกจากการคำนวณเส้นรอบวงและพื้นที่แลัว คลาสนี้ยังออกแบบให้สามารถคำนวณหาเส้นผ่านศูนย์กลางของวงกลมได้ด้วยดังนี้
@@ -142,39 +132,4 @@ Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.15926535897
 Shape Color=[0, 0, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
 ```
 
-## ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน
 
-https://github.com/praisan/ShapeApplication/tree/dc0df02dcc6b6a1ff95e99dc2c0878f8f68e2e33
-
-เนื่องจากรัศมีของวงกลมควรมีค่ามากกว่าและเท่ากับ 0 และค่าสีควรมี 3 ค่าเพื่อแทนความสว่างของช่องสัญญาณสีทั้งสาม [Red,Green,Blue] และมีค่าความเข้มสีอยู่ในช่วง 0-255 
-
-ปิติจึงแก้ไข code เพื่อให้สามารถตรวจสอบค่าให้เหมาะสมก่อนการกำหนดค่าต่าง ๆ ทำให้มีการเปลี่ยนแปลงดังนี้
-
-### Code
-```java
-
-    public Circle(double radius) {
-        this.setRadius(radius);
-        this.bgColor=new int[]{0,0,0};
-    }
-
-    public Circle(double radius, int[] bgColor) {
-        this.setRadius(radius);
-        this.setBgColor(bgColor);
-    }
-
-    public void setRadius(double radius) {
-        if(radius<0) return;
-        this.radius = radius;
-    }
-
-    public void setBgColor(int[] bgColor) {
-        if(bgColor.length!=3) return;
-        for(int i=0;i<3;i++){
-            bgColor[i]=(bgColor[i]>=0)?bgColor[i]:0;
-            bgColor[i]=(bgColor[i]<=255)?bgColor[i]:255;
-        }
-        this.bgColor = bgColor;
-    }
-
-```
