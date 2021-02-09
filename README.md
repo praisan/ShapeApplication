@@ -4,7 +4,17 @@
 แต่ละรูปทรงสามารถเติมสีได้ รวมถึงสามารถคำนวณพื้นที่ และเส้นรอบรูปได้
 และอาจมีการคำนาณคุณสมบัติอื่นของรูปทรงนั้น ๆ
 
-## ก้าวที่ 1 Class-Object
+<a name="toc"></a>
+## สารบัญ 
+* ก้าวที่ 1 Class-object และการใช้งาน <br>
+https://github.com/praisan/ShapeApplication/tree/3ec7b1959f99adc484c6c0e25ed9461061f39b9c
+
+* Click <a href="#move02">ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน </a><br>
+
+
+## ก้าวที่ 1 Class-object และการใช้งาน
+
+https://github.com/praisan/ShapeApplication/tree/3ec7b1959f99adc484c6c0e25ed9461061f39b9c
 
 ปิติเริ่มจากออกแบบคลาส Circle ที่สามารถจดจำสีและรัศมีของวงกลมได้ สามารถเปลี่ยนแปลงได้ในภายหลังหากต้องการ
 นอกจากการคำนวณเส้นรอบวงและพื้นที่แลัว คลาสนี้ยังออกแบบให้สามารถคำนวณหาเส้นผ่านศูนย์กลางของวงกลมได้ด้วยดังนี้
@@ -131,5 +141,40 @@ Shape Color=[0, 0, 0]: Circle , Radius=8.0, Diameter=16.0, Area=201.061929829746
 Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.1592653589793, Perimeter=62.83185307179586
 Shape Color=[0, 0, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
 ```
+<a name="move02"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน
 
+เนื่องจากรัศมีของวงกลมควรมีค่ามากกว่าและเท่ากับ 0 และค่าสีควรมี 3 ค่าเพื่อแทนความสว่างของช่องสัญญาณสีทั้งสาม [Red,Green,Blue] และมีค่าความเข้มสีอยู่ในช่วง 0-255 
+
+ปิติจึงแก้ไข code เพื่อให้สามารถตรวจสอบค่าให้เหมาะสมก่อนการกำหนดค่าต่าง ๆ ทำให้มีการเปลี่ยนแปลงดังนี้
+
+### Code
+```java
+
+    public Circle(double radius) {
+        this.setRadius(radius);
+        this.bgColor=new int[]{0,0,0};
+    }
+
+    public Circle(double radius, int[] bgColor) {
+        this.setRadius(radius);
+        this.setBgColor(bgColor);
+    }
+
+    public void setRadius(double radius) {
+        if(radius<0) return;
+        this.radius = radius;
+    }
+
+    public void setBgColor(int[] bgColor) {
+        if(bgColor.length!=3) return;
+        for(int i=0;i<3;i++){
+            bgColor[i]=(bgColor[i]>=0)?bgColor[i]:0;
+            bgColor[i]=(bgColor[i]<=255)?bgColor[i]:255;
+        }
+        this.bgColor = bgColor;
+    }
+
+```
 

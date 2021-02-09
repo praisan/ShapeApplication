@@ -5,22 +5,32 @@ public class Circle {
     private int[] bgColor;
 
     public Circle(double radius) {
-        this.radius = radius;
+        this.setRadius(radius);
         this.bgColor=new int[]{0,0,0};
     }
 
     public Circle(double radius, int[] bgColor) {
-        this.radius = radius;
-        this.bgColor = bgColor;
+        this.setRadius(radius);
+        this.setBgColor(bgColor);
     }
 
     public double getRadius() {return this.radius;}
 
     public int[] getBgColor() {return this.bgColor;}
 
-    public void setRadius(double radius) {this.radius = radius;}
+    public void setRadius(double radius) {
+        if(radius<0) return;
+        this.radius = radius;
+    }
 
-    public void setBgColor(int[] bgColor) {this.bgColor = bgColor;}
+    public void setBgColor(int[] bgColor) {
+        if(bgColor.length!=3) return;
+        for(int i=0;i<3;i++){
+            bgColor[i]=(bgColor[i]>=0)?bgColor[i]:0;
+            bgColor[i]=(bgColor[i]<=255)?bgColor[i]:255;
+        }
+        this.bgColor = bgColor;
+    }
 
     public double getDiameter() {
         return this.radius * 2;
