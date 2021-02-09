@@ -356,7 +356,234 @@ Shape Color=[0, 0, 0]: Rectangle , width=3.0,height=4.0, Diagonal=5.0, Area=12.0
 
 การออกแบบใหม่นี้ยังช่วยให้ Code ในการเรียกใช้งานสื่อความหมายเข้าใจง่ายขึ้นด้วยจากการใช้คุณสมบัติ การมีได้หลายรูป (Polymorphism)ที่เคยใช้ ```Object[] shapes = new Object[5];``` สามมารถเปลี่ยนมาใช้เป็น ```Shape[] shapes = new Shape[5];```
 
+### การออกแบบ
+
 ```
 Shape<-Circle 
 Shape<-Rectangle 
+```
+<table>
+<thead>
+  <tr>
+    <th >Shape</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>
+      -bgColor: int[]</td>
+  </tr>
+  <tr>
+    <td>
+      +Shape(bgColor: int[])<br>
+      +getBgColor():int[]<br>
+      +setBgColor(bgColor: int[]):void<br>
+      +toString():String
+    </td>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th >Circle</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>-radius: double</td>
+  </tr>
+  <tr>
+    <td>
+      +Circle(radius:double)<br>
+      +Circle(radius:double,bgColor: int[])<br>
+      +getRadius():double<br>
+      +setRadius(radius:double):void<br>
+      +getDiameter():double<br>
+      +getPerimeter():double<br>
+      +getArea():double<br>
+      +toString():String
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th >Rectangle</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>
+      -width: double<br>
+      -height: double</td>
+  </tr>
+  <tr>
+    <td>
+      +Rectangle(width: double,height: double)<br>
+      +Rectangle(width: double,height: double,bgColor: int[])<br>
+      +getWidth():double<br>
+      +getHeight():double<br>
+      +setWidth(width: double):void<br>
+      +setHeight(height: double):void<br>
+      +getDiagonal():double<br>
+      +getPerimeter():double<br>
+      +getArea():double<br>
+      +toString():String
+    </td>
+</tbody>
+</table>
+
+### Code
+
+```java
+public class Shape {
+    private int[] bgColor;
+
+    public Shape(int[] bgColor) {
+        this.setBgColor(bgColor);
+    }
+    
+    public int[] getBgColor() {return this.bgColor;}
+    
+    public void setBgColor(int[] bgColor) {
+        if(bgColor.length!=3) return;
+        for(int i=0;i<3;i++){
+            bgColor[i]=(bgColor[i]>=0)?bgColor[i]:0;
+            bgColor[i]=(bgColor[i]<=255)?bgColor[i]:255;
+        }
+        this.bgColor = bgColor;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Shape ");
+        sb.append("Color=[").append(this.bgColor[0]).append(", ").append(this.bgColor[1]).append( ", ").append(this.bgColor[2]).append("]");
+        return sb.toString();
+    }
+}
+```
+
+```java
+public class Circle extends Shape{
+
+    private double radius;
+
+    public Circle(double radius, int[] bgColor) {
+        super(bgColor);
+        this.setRadius(radius);
+    }
+    
+    public Circle(double radius) {
+        this(radius,new int[]{0,0,0});
+    }
+
+    public double getRadius() {return this.radius;}
+
+    public void setRadius(double radius) {
+        if(radius<0) return;
+        this.radius = radius;
+    }
+
+    public double getDiameter() {
+        return this.radius * 2;
+    }
+
+    public double getArea() {
+        return Math.PI * this.radius * this.radius;
+    }
+
+    public double getPerimeter() {
+        return 2 * Math.PI * this.radius;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append(": Circle , Radius=").append(this.radius);
+        sb.append(", Diameter=").append(this.getDiameter());
+        sb.append(", Area=").append(this.getArea());
+        sb.append(", Perimeter=").append(this.getPerimeter());
+        return sb.toString();
+    }
+}
+```
+
+```java
+public class Rectangle extends Shape {
+
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height, int[] bgColor) {
+        super(bgColor);
+        this.setWidth(width);
+        this.setHeight(height);
+    }
+    
+    public Rectangle(double width, double height) {
+        this(width,height,new int[]{0,0,0});
+    }
+
+    public double getWidth() {return width;}
+
+    public double getHeight() {return height;}
+   
+    public void setWidth(double width) {if(width<0) return; this.width = width;}
+
+    public void setHeight(double height) {if(height<0) return; this.height = height;}
+    
+    public double getDiagonal() {
+        return Math.sqrt(this.width*this.width+this.height*this.height);
+    }
+    
+    public double getArea() {
+        return this.width*this.height;
+    }
+
+    public double getPerimeter() {
+        return 2 * (this.width+this.height);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append(": Rectangle , width=").append(this.width).append(",height=").append(this.height);
+        sb.append(", Diagonal=").append(this.getDiagonal());
+        sb.append(", Area=").append(this.getArea());
+        sb.append(", Perimeter=").append(this.getPerimeter());
+        return sb.toString();
+    }
+}
+```
+
+```java
+public class Test {
+
+    public static void main(String[] args) {
+        Circle shape01 = new Circle(10);
+        System.out.println(shape01.toString());
+        
+        Rectangle shape02 = new Rectangle(10,20);
+        System.out.println(shape01.toString());
+        
+        System.out.println("array");
+
+        Shape[] shapes = new Shape[5];
+        shapes[0] = new Circle(8);
+        shapes[1] = new Circle(10);
+        shapes[2] = new Circle(15,new int[]{35,700,-3});
+        shapes[3] = new Rectangle(15,3,new int[]{-10,25,600});
+        shapes[4] = new Rectangle(3,4);
+        
+        for(int i=0;i<5;i++){
+            System.out.println(shapes[i].toString());
+        }
+    }
+}
 ```
