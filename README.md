@@ -19,6 +19,9 @@ https://github.com/praisan/ShapeApplication/tree/06a16d6fb453f608e66089ff5606d03
 https://github.com/praisan/ShapeApplication/tree/792cb9846adb08df8b803ded9ef2681b7e0b1dec
 
 * <a href="#move05">ก้าวที่ 5 เพิ่ม Triangle </a><br>
+https://github.com/praisan/ShapeApplication/tree/5eee303c25b119d3c625c8c7bcafad4078195714
+
+* <a href="#move06">ก้าวที่ 6 เพิ่มความสามารถ และป้องกันการแก้ไข </a><br>
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
@@ -599,6 +602,8 @@ public class Test {
 <a href="#toc">[กลับสารบัญ]</a>
 ## ก้าวที่ 5 เพิ่ม Triangle
 
+https://github.com/praisan/ShapeApplication/tree/5eee303c25b119d3c625c8c7bcafad4078195714
+
 ปิติเพิ่มคลาส Triangle ที่รับความยาวของด้านทั้งสามของสามเหลี่ยมและเตรียม code สำหรับคำนวณความยาวรอบสามเหลี่ยมและพื้นที่ไว้ให้ด้วย ซึ่งการสืบทอดมาจากคลาส Shape ทำให้ไม่ต้องเขียน code ในส่วนที่ใช้ร่วมกันอีก
 
 ### Code
@@ -700,3 +705,53 @@ Shape Color=[0, 0, 0]: Rectangle , width=3.0,height=4.0, Diagonal=5.0, Area=12.0
 Shape Color=[0, 10, 20]: Triangle , side1=3.0,side2=4.0,side3=5.0, Area=6.0, Perimeter=12.0
 Shape Color=[0, 0, 0]: Triangle , side1=15.0,side2=10.0,side3=5.0, Area=0.0, Perimeter=30.0
 ```
+
+<a name="move06"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## ก้าวที่ 6 เพิ่มความสามารถ และป้องกันการแก้ไข 
+
+ปิติอยากให้รูปร่างทุกแบบที่เขาสร้างขึ้นสามารถกำหนดสีของเส้นขอบได้จึงได้เพิ่มความสามารถในการจำสีเส้นขอบ ซึ่งกำหนดให้เป็นสีเดียวกันกับสีพื้นหลังแต่สามารถเปลี่ยนใหม่ได้หากผู้ใช้ต้องการ ซึ่งมีการตรวจสอบช่วงค่าที่ถูกต้องก่อนเปลี่ยนแปลงด้วยและเพื่อป้องกันความผิดพลาดจึงป้องกันไม่ให้คลาสที่สืบทอดแก้ไขเปลี่ยนแปลงได้ ทั้งหมดนี้ปิติสามารถปรับที่คลาส Shape ได้ทั้งหมดโดยไม่ต้องแก้ไขคลาสอื่นเลยดังนี้
+
+### Code
+```java
+public class Shape {
+    private int[] bgColor;
+    private int[] lineColor;
+
+    public Shape(int[] color) {
+        this.setBgColor(color);
+        this.setLineColor(color);
+    }
+    
+    public int[] getBgColor() {return this.bgColor;}
+    public int[] getLineColor() {return this.lineColor;}
+    
+    private int[] checkColor(int[] color) {
+        for(int i=0;i<3;i++){
+            color[i]=(color[i]>=0)?color[i]:0;
+            color[i]=(color[i]<=255)?color[i]:255;
+        }
+        return color;
+    }
+    
+    public final void setBgColor(int[] bgColor) {
+        if(bgColor.length!=3) return;
+        this.bgColor = this.checkColor(bgColor);
+    }
+    
+    public final void setLineColor(int[] lineColor) {
+        if(lineColor.length!=3) return;
+        this.lineColor = this.checkColor(lineColor);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Shape ");
+        sb.append("fill color=[").append(this.bgColor[0]).append(", ").append(this.bgColor[1]).append( ", ").append(this.bgColor[2]).append("]");
+        sb.append("line color=[").append(this.lineColor[0]).append(", ").append(this.lineColor[1]).append( ", ").append(this.lineColor[2]).append("]");
+        return sb.toString();
+    }
+}
+```
+
