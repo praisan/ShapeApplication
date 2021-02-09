@@ -8,9 +8,15 @@
 นอกจากเส้นรอบวงและพื้นที่แลัวคลาสนี้ยังออกแบบให้สามารถคำนวณหาเส้นผ่านศูนย์กลางของวงกลมได้ด้วย
 
 
-|                                                                               Circle                                                                               |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| -radius: double -bgColor: int[]                                                                                                                                   |
-| +Circle(radius:double) +Circle(radius:double,bgColor: int[]) +getRadius():double +getDiameter():double +getPerimeter():double +getArea():double +toString():String |
+|                                                                               Circle                                                                             |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| -radius: double -bgColor: int[] |
+| +Circle(radius:double) 
++Circle(radius:double,bgColor: int[]) 
++getRadius():double 
++getDiameter():double 
++getPerimeter():double 
++getArea():double 
++toString():String |
 
 
