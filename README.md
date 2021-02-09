@@ -1,5 +1,16 @@
 # ShapeApplication
+
+# TOC 
+## ก้าวที่ 1
+https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
+
+## ก้าวที่ 2
+https://github.com/praisan/ShapeApplication/tree/9a313ac8665b490e6b81cf44f3428bfb0db05d5f
+
+# เรื่องราวการออกแบบ
 ## ก้าวที่ 1 
+https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
+
 ปิติ ต้องการออกแบบโปรแกรมสำหรับไว้ใช้ในการวาดรูปทรงต่าง ๆ
 แต่ละรูปทรงสามารถเติมสีได้ รวมถึงสามารถคำนวณพื้นที่ และเส้นรอบรูปได้
 และอาจมีการคำนาณคุณสมบัติอื่นของรูปทรงนั้น ๆ
@@ -131,6 +142,9 @@ Shape Color=[0, 0, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.85834705770
 ```
 
 ## ก้าวที่ 2
+
+https://github.com/praisan/ShapeApplication/tree/9a313ac8665b490e6b81cf44f3428bfb0db05d5f
+
 เนื่องจากรัศมีของวงกลมควรมีค่ามากกว่าและเท่ากับ 0 และค่าสีควรมี 3 ค่าเพื่อแทนความสว่างของช่องสัญญาณสีทั้งสาม [Red,Green,Blue] และมีค่าความเข้มสีอยู่ในช่วง 0-255 
 
 ปิติจึงแก้ไข code เพื่อให้สามารถตรวจสอบค่าให้เหมาะสมก่อนการกำหนดค่าต่าง ๆ ทำให้มีการเปลี่ยนแปลงดังนี้
