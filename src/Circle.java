@@ -1,35 +1,22 @@
 
-public class Circle {
+public class Circle extends Shape{
 
     private double radius;
-    private int[] bgColor;
-
-    public Circle(double radius) {
-        this.setRadius(radius);
-        this.bgColor=new int[]{0,0,0};
-    }
 
     public Circle(double radius, int[] bgColor) {
+        super(bgColor);
         this.setRadius(radius);
-        this.setBgColor(bgColor);
+    }
+    
+    public Circle(double radius) {
+        this(radius,new int[]{0,0,0});
     }
 
     public double getRadius() {return this.radius;}
 
-    public int[] getBgColor() {return this.bgColor;}
-
     public void setRadius(double radius) {
         if(radius<0) return;
         this.radius = radius;
-    }
-
-    public void setBgColor(int[] bgColor) {
-        if(bgColor.length!=3) return;
-        for(int i=0;i<3;i++){
-            bgColor[i]=(bgColor[i]>=0)?bgColor[i]:0;
-            bgColor[i]=(bgColor[i]<=255)?bgColor[i]:255;
-        }
-        this.bgColor = bgColor;
     }
 
     public double getDiameter() {
@@ -47,8 +34,7 @@ public class Circle {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Shape ");
-        sb.append("Color=[").append(this.bgColor[0]).append(", ").append(this.bgColor[1]).append( ", ").append(this.bgColor[2]).append("]");
+        sb.append(super.toString());
         sb.append(": Circle , Radius=").append(this.radius);
         sb.append(", Diameter=").append(this.getDiameter());
         sb.append(", Area=").append(this.getArea());

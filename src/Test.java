@@ -10,7 +10,7 @@ public class Test {
         
         System.out.println("array");
 
-        Object[] shapes = new Object[5];
+        Shape[] shapes = new Shape[5];
         shapes[0] = new Circle(8);
         shapes[1] = new Circle(10);
         shapes[2] = new Circle(15,new int[]{35,700,-3});

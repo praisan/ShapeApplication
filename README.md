@@ -13,6 +13,9 @@ https://github.com/praisan/ShapeApplication/tree/3ec7b1959f99adc484c6c0e25ed9461
 https://github.com/praisan/ShapeApplication/tree/161a52b491e815b75b466a4fc9bd883bad259acc
 
 * <a href="#move03">ก้าวที่ 3 เพิ่ม class Rectangle </a><br>
+https://github.com/praisan/ShapeApplication/tree/06a16d6fb453f608e66089ff5606d0394280e80f
+
+* <a href="#move04">ก้าวที่ 4 สืบทอด(Inheritance) ลดความซ้ำซ้อน </a><br>
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
@@ -187,6 +190,8 @@ https://github.com/praisan/ShapeApplication/tree/161a52b491e815b75b466a4fc9bd883
 <a href="#toc">[กลับสารบัญ]</a>
 ## ก้าวที่ 3 เพิ่ม class Rectangle
 
+https://github.com/praisan/ShapeApplication/tree/06a16d6fb453f608e66089ff5606d0394280e80f
+
 ปิติเริ่มออกแบบคลาสถัดไปซึ่งคือ Rectangle โดยใช้แนวทางออกแบบเดียวกับ class Circle และได้ทดสอบการเรียกใช้งานดังนี้
 ### การออกแบบ
 <table>
@@ -340,5 +345,18 @@ Shape Color=[0, 0, 0]: Circle , Radius=8.0, Diameter=16.0, Area=201.061929829746
 Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.1592653589793, Perimeter=62.83185307179586
 Shape Color=[35, 255, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
 Shape Color=[0, 25, 255]: Rectangle , width=15.0,height=3.0, Diagonal=15.297058540778355, Area=45.0, Perimeter=36.0
-Shape Color=[0, 0, 0]: Rectangle , width=3.0,height=4.0, Diagonal=5.0, Area=12.0, Perimeter=14.0
+Shape Color=[0, 0, 0]: Rectangle , width=3.0,height=4.0, Diagonal=5.0, Area=12.0, Perimeter=14.0 
+```
+
+<a name="move04"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## ก้าวที่ 4 สืบทอด(Inheritance) ลดความซ้ำซ้อน
+
+หลังจากเพิ่ม Rectangle ปิติพบว่ามี Code หลายส่วนซ้ำซ้อนกับ Circle คือการกำหนดสีของรูปทรงและหากเพิ่มคลาสรูปทรงอื่น ๆ อีกต่อไป Code ส่วนนี้ก็ยังคงเหมือนเดิมจึงตัดสินใจสร้าง Parent class เพื่อให้ Circle และ Rectangle ได้สืบทอดคุณสมบัติที่เหมือนกันนั้นมาใช้งาน 
+
+การออกแบบใหม่นี้ยังช่วยให้ Code ในการเรียกใช้งานสื่อความหมายเข้าใจง่ายขึ้นด้วยจากการใช้คุณสมบัติ การมีได้หลายรูป (Polymorphism)ที่เคยใช้ ```Object[] shapes = new Object[5];``` สามมารถเปลี่ยนมาใช้เป็น ```Shape[] shapes = new Shape[5];```
+
+```
+Shape<-Circle 
+Shape<-Rectangle 
 ```
