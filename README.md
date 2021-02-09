@@ -8,15 +8,7 @@
 นอกจากเส้นรอบวงและพื้นที่แลัวคลาสนี้ยังออกแบบให้สามารถคำนวณหาเส้นผ่านศูนย์กลางของวงกลมได้ด้วย
 
 
-'''mermaid
-graph LR
-
-A(Start)
-
-A --> B[Look for an item]
-
-B --> C{Did you find it?}
-C -->|Yes| D(Stop looking)
-C -->|No| E{Do you need it?}
-E -->|Yes| B
-E -->|No| D
+```mermaid
+graph TD;
+    A-->B;
+```
