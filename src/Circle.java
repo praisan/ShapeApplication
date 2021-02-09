@@ -14,21 +14,13 @@ public class Circle {
         this.bgColor = bgColor;
     }
 
-    public double getRadius() {
-        return this.radius;
-    }
+    public double getRadius() {return this.radius;}
 
-    public int[] getBgColor() {
-        return this.bgColor;
-    }
+    public int[] getBgColor() {return this.bgColor;}
 
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
+    public void setRadius(double radius) {this.radius = radius;}
 
-    public void setBgColor(int[] bgColor) {
-        this.bgColor = bgColor;
-    }
+    public void setBgColor(int[] bgColor) {this.bgColor = bgColor;}
 
     public double getDiameter() {
         return this.radius * 2;

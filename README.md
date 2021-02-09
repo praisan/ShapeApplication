@@ -61,7 +61,7 @@ public class Circle {
 
     public Circle(double radius) {
         this.radius = radius;
-        bgColor=new int[]{0,0,0};
+        this.bgColor=new int[]{0,0,0};
     }
 
     public Circle(double radius, int[] bgColor) {
@@ -69,21 +69,13 @@ public class Circle {
         this.bgColor = bgColor;
     }
 
-    public double getRadius() {
-        return radius;
-    }
+    public double getRadius() {return this.radius;}
 
-    public int[] getBgColor() {
-        return bgColor;
-    }
+    public int[] getBgColor() {return this.bgColor;}
 
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
+    public void setRadius(double radius) {this.radius = radius;}
 
-    public void setBgColor(int[] bgColor) {
-        this.bgColor = bgColor;
-    }
+    public void setBgColor(int[] bgColor) {this.bgColor = bgColor;}
 
     public double getDiameter() {
         return this.radius * 2;
@@ -101,11 +93,11 @@ public class Circle {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Shape ");
-        sb.append("Color=[").append(getBgColor()[0]).append(", ").append(getBgColor()[1]).append( ", ").append(getBgColor()[2]).append("]");
-        sb.append(": Circle , Radius=").append(radius);
-        sb.append(", Diameter=").append(getDiameter());
-        sb.append(", Area=").append(getArea());
-        sb.append(", Perimeter=").append(getPerimeter());
+        sb.append("Color=[").append(this.bgColor[0]).append(", ").append(this.bgColor[1]).append( ", ").append(this.bgColor[2]).append("]");
+        sb.append(": Circle , Radius=").append(this.radius);
+        sb.append(", Diameter=").append(this.getDiameter());
+        sb.append(", Area=").append(this.getArea());
+        sb.append(", Perimeter=").append(this.getPerimeter());
         return sb.toString();
     }
 }
@@ -136,4 +128,38 @@ Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.15926535897
 Shape Color=[0, 0, 0]: Circle , Radius=8.0, Diameter=16.0, Area=201.06192982974676, Perimeter=50.26548245743669
 Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.1592653589793, Perimeter=62.83185307179586
 Shape Color=[0, 0, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
+```
+
+## ก้าวที่ 2
+เนื่องจากรัศมีของวงกลมควรมีค่ามากกว่าและเท่ากับ 0 และค่าสีควรมี 3 ค่าเพื่อแทนความสว่างของช่องสัญญาณสีทั้งสาม [Red,Green,Blue] และมีค่าความเข้มสีอยู่ในช่วง 0-255 
+
+ปิติจึงแก้ไข code เพื่อให้สามารถครวจสอบค่าให้เหมาะสมก่อนการกำหนดค่าต่าง ๆ มีการเปลี่ยนแปลงดังนี้
+
+### Code
+```java
+
+    public Circle(double radius) {
+        this.setRadius(radius);
+        this.bgColor=new int[]{0,0,0};
+    }
+
+    public Circle(double radius, int[] bgColor) {
+        this.setRadius(radius);
+        this.setBgColor(bgColor);
+    }
+
+    public void setRadius(double radius) {
+        if(radius<0) return;
+        this.radius = radius;
+    }
+
+    public void setBgColor(int[] bgColor) {
+        if(bgColor.length!=3) return;
+        for(int i=0;i<3;i++){
+            bgColor[i]=(bgColor[i]>=0)?bgColor[i]:0;
+            bgColor[i]=(bgColor[i]<=255)?bgColor[i]:255;
+        }
+        this.bgColor = bgColor;
+    }
+
 ```
