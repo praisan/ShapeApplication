@@ -16,6 +16,9 @@ https://github.com/praisan/ShapeApplication/tree/161a52b491e815b75b466a4fc9bd883
 https://github.com/praisan/ShapeApplication/tree/06a16d6fb453f608e66089ff5606d0394280e80f
 
 * <a href="#move04">ก้าวที่ 4 สืบทอด(Inheritance) ลดความซ้ำซ้อน </a><br>
+https://github.com/praisan/ShapeApplication/tree/792cb9846adb08df8b803ded9ef2681b7e0b1dec
+
+* <a href="#move05">ก้าวที่ 5 เพิ่ม Triangle </a><br>
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
@@ -352,6 +355,8 @@ Shape Color=[0, 0, 0]: Rectangle , width=3.0,height=4.0, Diagonal=5.0, Area=12.0
 <a href="#toc">[กลับสารบัญ]</a>
 ## ก้าวที่ 4 สืบทอด(Inheritance) ลดความซ้ำซ้อน
 
+https://github.com/praisan/ShapeApplication/tree/792cb9846adb08df8b803ded9ef2681b7e0b1dec
+
 หลังจากเพิ่ม Rectangle ปิติพบว่ามี Code หลายส่วนซ้ำซ้อนกับ Circle คือการกำหนดสีของรูปทรงและหากเพิ่มคลาสรูปทรงอื่น ๆ อีกต่อไป Code ส่วนนี้ก็ยังคงเหมือนเดิมจึงตัดสินใจสร้าง Parent class เพื่อให้ Circle และ Rectangle ได้สืบทอดคุณสมบัติที่เหมือนกันนั้นมาใช้งาน 
 
 ปิติสร้างคลาส Shape เพื่อการกำหนดค่าสีของรูปทรงและรายละเอียดอื่นที่รูปทรงจะใช้ร่วมกันได้ และให้ Circle และ Rectangle สืบทอดและขยายความสามารถซึ่งต้องได้แก้ไข Constructor และ toString() เล็กน้อยซึ่งช่วยลดความซ้ำซ้อนได้ดีขึ้น
@@ -588,4 +593,110 @@ public class Test {
         }
     }
 }
+```
+
+<a name="move05"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## ก้าวที่ 5 เพิ่ม Triangle
+
+ปิติเพิ่มคลาส Triangle ที่รับความยาวของด้านทั้งสามของสามเหลี่ยมและเตรียม code สำหรับคำนวณความยาวรอบสามเหลี่ยมและพื้นที่ไว้ให้ด้วย ซึ่งการสืบทอดมาจากคลาส Shape ทำให้ไม่ต้องเขียน code ในส่วนที่ใช้ร่วมกันอีก
+
+### Code
+```java
+public class Triangle extends Shape {
+    private double side1,side2,side3;
+
+    public Triangle(double side1, double side2, double side3, int[] bgColor) {
+        super(bgColor);
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+    public Triangle(double side1, double side2, double side3) {
+        this(side1,  side2,  side3,new int[]{0,0,0});
+    }  
+
+    public double getSide1() {return side1;}
+    public double getSide2() {return side2;}
+    public double getSide3() {return side3;}
+
+    public void setSide1(double side1) {
+        if(side1<0) return;
+        this.side1 = side1;
+    }
+
+    public void setSide2(double side2) {
+        if(side2<0) return;
+        this.side2 = side2;
+    }
+
+    public void setSide3(double side3) {
+        if(side3<0) return;
+        this.side3 = side3;
+    }
+    
+    public double getPerimeter() {
+        return this.side1+this.side2+this.side3;
+    }
+    
+    public double getArea() {
+        double p=this.getPerimeter()/2;
+        return Math.sqrt(p*(p-this.side1)*(p-this.side2)*(p-this.side3));
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append(": Triangle , side1=").append(this.side1).append(",side2=").append(this.side2).append(",side3=").append(this.side3);
+        sb.append(", Area=").append(this.getArea());
+        sb.append(", Perimeter=").append(this.getPerimeter());
+        return sb.toString();
+    }
+}
+```
+
+```java
+public class Test {
+
+    public static void main(String[] args) {
+        Circle shape01 = new Circle(10);
+        System.out.println(shape01.toString());
+        
+        Rectangle shape02 = new Rectangle(10,20);
+        System.out.println(shape02.toString());
+        
+        Triangle shape03=new Triangle(10,10,10);
+        System.out.println(shape03.toString());
+        
+        System.out.println("array");
+
+        Shape[] shapes = new Shape[6];
+        shapes[0] = new Circle(8);
+        shapes[1] = new Circle(15,new int[]{35,700,-3});
+        shapes[2] = new Rectangle(15,3,new int[]{-10,25,600});
+        shapes[3] = new Rectangle(3,4);
+        shapes[4] = new Triangle(3,4,5,new int[]{-10,10,20});
+        shapes[5] = new Triangle(15,10,5);
+        
+        
+        for(int i=0;i<6;i++){
+            System.out.println(shapes[i].toString());
+        }
+    }
+}
+```
+
+### Output
+```
+Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.1592653589793, Perimeter=62.83185307179586
+Shape Color=[0, 0, 0]: Rectangle , width=10.0,height=20.0, Diagonal=22.360679774997898, Area=200.0, Perimeter=60.0
+Shape Color=[0, 0, 0]: Triangle , side1=10.0,side2=10.0,side3=10.0, Area=43.30127018922193, Perimeter=30.0
+array
+Shape Color=[0, 0, 0]: Circle , Radius=8.0, Diameter=16.0, Area=201.06192982974676, Perimeter=50.26548245743669
+Shape Color=[35, 255, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
+Shape Color=[0, 25, 255]: Rectangle , width=15.0,height=3.0, Diagonal=15.297058540778355, Area=45.0, Perimeter=36.0
+Shape Color=[0, 0, 0]: Rectangle , width=3.0,height=4.0, Diagonal=5.0, Area=12.0, Perimeter=14.0
+Shape Color=[0, 10, 20]: Triangle , side1=3.0,side2=4.0,side3=5.0, Area=6.0, Perimeter=12.0
+Shape Color=[0, 0, 0]: Triangle , side1=15.0,side2=10.0,side3=5.0, Area=0.0, Perimeter=30.0
 ```
