@@ -16,11 +16,21 @@
 <tbody>
   <tr>
     <td>-radius: double<br>-bgColor: int[]</td>
-    <td>-> บันทึกตัวเลขจำนวณจริง เอาไว้จำรัศมี <br> บันทึก array ของตัวเลขจำนวนเต็มเอาไว้จำค่าสี</td>
+    <td>
+      -> บันทึกตัวเลขจำนวณจริง เอาไว้จำรัศมี 
+      <br>-> บันทึก array ของตัวเลขจำนวนเต็มเอาไว้จำค่าสี
+    </td>
   </tr>
   <tr>
     <td>+Circle(radius:double)<br>+Circle(radius:double,bgColor: int[])<br>+getRadius():double<br>+getDiameter():double<br>+getPerimeter():double<br>+getArea():double<br>+toString():String</td>
-    <td></td>
+    <td>
+      -> 
+      <br>-> 
+      <br>-> 
+      <br>-> 
+      <br>->
+      <br>->
+    </td>
   </tr>
 </tbody>
 </table>
