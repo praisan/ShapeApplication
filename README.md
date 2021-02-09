@@ -1,10 +1,10 @@
 # ShapeApplication
 
-# TOC 
-## ก้าวที่ 1
+## TOC 
+* ก้าวที่ 1
 https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
 
-## ก้าวที่ 2
+* ก้าวที่ 2
 https://github.com/praisan/ShapeApplication/tree/9a313ac8665b490e6b81cf44f3428bfb0db05d5f
 
 # เรื่องราวการออกแบบ
