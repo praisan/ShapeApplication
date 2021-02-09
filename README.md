@@ -10,7 +10,7 @@
 
 |                                                                               Circle                                                                             |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| -radius: double -bgColor: int[] |
+| -radius: double<br>-bgColor: int[] |
 | +Circle(radius:double)<br>+Circle(radius:double,bgColor: int[<br>+getRadius():double<br>+getDiameter():double<br>+getPerimeter():double<br>+getArea():double<br>+toString():String |  
 
 
