@@ -1,14 +1,14 @@
 # ShapeApplication
 
 ## TOC 
-* ก้าวที่ 1
+* ก้าวที่ 1 Class-Object
 https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
 
-* ก้าวที่ 2
+* ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน
 https://github.com/praisan/ShapeApplication/tree/9a313ac8665b490e6b81cf44f3428bfb0db05d5f
 
 # เรื่องราวการออกแบบ
-## ก้าวที่ 1 
+## ก้าวที่ 1 Class-Object
 https://github.com/praisan/ShapeApplication/tree/1fcdcefc1eefb93f56cf293d3c1b8b0565b3c7a3
 
 ปิติ ต้องการออกแบบโปรแกรมสำหรับไว้ใช้ในการวาดรูปทรงต่าง ๆ
@@ -141,7 +141,7 @@ Shape Color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.15926535897
 Shape Color=[0, 0, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
 ```
 
-## ก้าวที่ 2
+## ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน
 
 https://github.com/praisan/ShapeApplication/tree/9a313ac8665b490e6b81cf44f3428bfb0db05d5f
 
