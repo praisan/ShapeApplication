@@ -11,12 +11,6 @@
 |                                                                               Circle                                                                             |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | -radius: double -bgColor: int[] |
-| +Circle(radius:double) 
-+Circle(radius:double,bgColor: int[]) 
-+getRadius():double 
-+getDiameter():double 
-+getPerimeter():double 
-+getArea():double 
-+toString():String |
+| +Circle(radius:double)<br>+Circle(radius:double,bgColor: int[<br>+getRadius():double<br>+getDiameter():double<br>+getPerimeter():double<br>+getArea():double<br>+toString():String |  
 
 
