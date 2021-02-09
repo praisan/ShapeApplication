@@ -28,7 +28,7 @@
       +Circle(radius:double)<br>
       +Circle(radius:double,bgColor: int[])<br>
       +getRadius():double<br>
-      +getBgColor():double<br>
+      +getBgColor():int[]<br>
       +getDiameter():double<br>
       +getPerimeter():double<br>
       +getArea():double<br>
