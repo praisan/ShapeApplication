@@ -6,12 +6,12 @@
 
 <a name="toc"></a>
 ## สารบัญ 
-* ก้าวที่ 1 Class-object และการใช้งาน <br>
+* <a href="#move01">ก้าวที่ 1 Class-object และการใช้งาน</a> <br>
 https://github.com/praisan/ShapeApplication/tree/3ec7b1959f99adc484c6c0e25ed9461061f39b9c
 
-* Click <a href="#move02">ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน </a><br>
+* <a href="#move02">ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน </a><br>
 
-
+<a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
 
 https://github.com/praisan/ShapeApplication/tree/3ec7b1959f99adc484c6c0e25ed9461061f39b9c
