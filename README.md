@@ -17,19 +17,29 @@
   <tr>
     <td>-radius: double<br>-bgColor: int[]</td>
     <td>
-      -> บันทึกตัวเลขจำนวณจริง เอาไว้จำรัศมี 
-      <br>-> บันทึก array ของตัวเลขจำนวนเต็มเอาไว้จำค่าสี
+      -> บันทึกตัวเลขจำนวณจริง เอาไว้จำรัศมี<br>
+      -> บันทึก array ของตัวเลขจำนวนเต็มเอาไว้จำค่าสี
     </td>
   </tr>
   <tr>
-    <td>+Circle(radius:double)<br>+Circle(radius:double,bgColor: int[])<br>+getRadius():double<br>+getDiameter():double<br>+getPerimeter():double<br>+getArea():double<br>+toString():String</td>
     <td>
-      -> 
-      <br>-> 
-      <br>-> 
-      <br>-> 
-      <br>->
-      <br>->
+      +Circle(radius:double)<br>
+      +Circle(radius:double,bgColor: int[])<br>
+      +getRadius():double<br>
+      +getDiameter():double<br>
+      +getPerimeter():double<br>
+      +getArea():double<br>
+      +toString():String
+    </td>
+    <td>
+      -> เอาไว้สร้างวงกลมตามรัศมีที่กำหนด และจะใส่สีดำที่พื้นหลังเป็นสีดำ [0,0,0] <br>
+      -> เอาไว้สร้างวงกลมตามรัศมีที่กำหนด และจะใส่สีดำที่พื้นหลังตามที่ระบุ <br>
+      )<br>
+      > เอาไว้คืนค่าต่าง ๆ ตามที่ผู้ใช้ต้องการ <br>
+      )<br>
+      )<br>
+      > เอาไว้คืนค่าต่าง ๆ ตามที่ผู้ใช้ต้องการ <br>
+      )<br> 
     </td>
   </tr>
 </tbody>
