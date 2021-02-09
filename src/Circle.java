@@ -6,7 +6,7 @@ public class Circle {
 
     public Circle(double radius) {
         this.radius = radius;
-        bgColor=new int[]{0,0,0};
+        this.bgColor=new int[]{0,0,0};
     }
 
     public Circle(double radius, int[] bgColor) {
@@ -15,11 +15,11 @@ public class Circle {
     }
 
     public double getRadius() {
-        return radius;
+        return this.radius;
     }
 
     public int[] getBgColor() {
-        return bgColor;
+        return this.bgColor;
     }
 
     public void setRadius(double radius) {
@@ -46,14 +46,11 @@ public class Circle {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Shape ");
-        sb.append("Color=[").append(getBgColor()[0]).append(", ").append(getBgColor()[1]).append( ", ").append(getBgColor()[2]).append("]");
-        sb.append(": Circle , Radius=").append(radius);
-        sb.append(", Diameter=").append(getDiameter());
-        sb.append(", Area=").append(getArea());
-        sb.append(", Perimeter=").append(getPerimeter());
+        sb.append("Color=[").append(this.bgColor[0]).append(", ").append(this.bgColor[1]).append( ", ").append(this.bgColor[2]).append("]");
+        sb.append(": Circle , Radius=").append(this.radius);
+        sb.append(", Diameter=").append(this.getDiameter());
+        sb.append(", Area=").append(this.getArea());
+        sb.append(", Perimeter=").append(this.getPerimeter());
         return sb.toString();
     }
-
-        
-
 }
