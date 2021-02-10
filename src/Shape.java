@@ -1,5 +1,5 @@
 
-public class Shape {
+public abstract class Shape {
     private int[] bgColor;
     private int[] lineColor;
 
@@ -28,6 +28,8 @@ public class Shape {
         if(lineColor.length!=3) return;
         this.lineColor = this.checkColor(lineColor);
     }
+    public abstract double getArea();
+    public abstract double getPerimeter();
     
     @Override
     public String toString() {

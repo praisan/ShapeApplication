@@ -22,6 +22,10 @@ https://github.com/praisan/ShapeApplication/tree/792cb9846adb08df8b803ded9ef2681
 https://github.com/praisan/ShapeApplication/tree/5eee303c25b119d3c625c8c7bcafad4078195714
 
 * <a href="#move06">ก้าวที่ 6 เพิ่มความสามารถ และป้องกันการแก้ไข </a><br>
+https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba4c86ffc39
+
+* <a href="#move07">ก้าวที่ 7 Abstract class เติมเต็มส่วนที่ขาดและติดปีก Polymorphism </a><br>
+
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
@@ -710,6 +714,8 @@ Shape Color=[0, 0, 0]: Triangle , side1=15.0,side2=10.0,side3=5.0, Area=0.0, Per
 <a href="#toc">[กลับสารบัญ]</a>
 ## ก้าวที่ 6 เพิ่มความสามารถ และป้องกันการแก้ไข 
 
+https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba4c86ffc39
+
 ปิติอยากให้รูปร่างทุกแบบที่เขาสร้างขึ้นสามารถกำหนดสีของเส้นขอบได้จึงได้เพิ่มความสามารถในการจำสีเส้นขอบ ซึ่งกำหนดให้เป็นสีเดียวกันกับสีพื้นหลังแต่สามารถเปลี่ยนใหม่ได้หากผู้ใช้ต้องการ ซึ่งมีการตรวจสอบช่วงค่าที่ถูกต้องก่อนเปลี่ยนแปลงด้วยและเพื่อป้องกันความผิดพลาดจึงป้องกันไม่ให้คลาสที่สืบทอดแก้ไขเปลี่ยนแปลงโดยการเขียนทับ(Override) ได้ ทั้งหมดนี้ปิติสามารถปรับที่คลาส Shape ได้ทั้งหมดโดยไม่ต้องแก้ไขคลาสอื่นเลยดังนี้
 
 ### Code
@@ -755,3 +761,63 @@ public class Shape {
 }
 ```
 
+<a name="move07"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## ก้าวที่ 7 Abstract class เติมเต็มส่วนที่ขาดและติดปีก Polymorphism 
+
+ปิติพบว่าหากใช้คุณสมบัติ Polymorphism เก็บรูปร่างต่าง ๆ ไว้ด้วยกันโดยใช้ array ชนิด Shape ทำให้การทำงานค่อนข้างสะดวก แต่หากต้องการทราบพื้นที่หรือเส้นรอบรูปของรูปร่างต่าง ๆ จะต้องแปลง (cast) กลับเป็นชนิดที่ถูกต้องของ object นั้น ๆ ก่อน เช่น 
+
+```java
+Shape[] shapes = new Shape[3];
+shapes[0] = new Circle(15,new int[]{35,700,-3});
+double area = ((Circle)shapes[0]).getArea();
+```
+
+การทำแบบนี้ก็ไม่ค่อยสะดวกเท่าที่ควรเนื่องจากการประกาศตัวแปรเป็นชนิด Shape ที่ไม่มีเมดธอด getArea() จึงไม่สามารถเรียกใช้ได้โดยตรง 
+
+ปิติจึงเพิ่มเมดธอด getArea() และ getPerimeter() ซึ่งทุกรูปทรงในโปรแกรมนี้จะต้องมีเมดธอดเหล่านี้เหมือนกันแต่เนื่องจากแต่ละรูปทรงจะมีการคำนวณต่างกัน ปิติจึงให้เมดธอดเหล่านี้เป็น abstract เมดธอด ซึ่งจะไม่มีการเขียน code ใด ๆ และเปลี่ยนคลาส Shape เป็น abstract คลาสด้วย
+
+การออกแบบนี้ทำให้ object ที่ประกาศเป็นชนิด Shape สามารถเรียกใช้งานเมดธอด getArea() ได้ และด้วยภาษา Java มีความสามารถในการผูกแบบไดนามิก (Dynamic binding) จะทำการผูกการทำงานของเมดธอดตอนรัน (runtime binding หรือ late binding) การทำงานของเมดธอดจะเป็นได้หลายรูปแบบเป็นไปตามชนิดของ object จริง ๆ ที่สร้างขึ้น (คุณสมบัติ Polymorphism)ไม่เช่นนั้นแล้วหากผูกการทำงานตอน compile (compile time binding) การทำงานของเมดธอดต่างจะทำงานด้วย code เดียวกันเสมอ
+
+### Code
+```java
+ public abstract class Shape {
+  //... code อื่นเหมือนเดิมไม่มีการเปลี่ยนแปลง
+    public abstract double getArea();
+    public abstract double getPerimeter();
+    
+  //... code อื่นเหมือนเดิมไม่มีการเปลี่ยนแปลง
+```
+```java
+public class Test {
+
+    public static void main(String[] args) {
+
+        Shape[] shapes = new Shape[3];
+        shapes[0] = new Circle(15,new int[]{35,700,-3});
+        shapes[1] = new Rectangle(15,3,new int[]{-10,25,600});
+        shapes[2] = new Triangle(3,4,5,new int[]{-10,10,20});
+        
+        for(int i=0;i<3;i++){
+            System.out.println(shapes[i].toString());
+        }
+
+        double totalArea=0;
+        for(int i=0;i<3;i++){
+            totalArea+=shapes[i].getArea();
+        }
+        System.out.println("Tital area of shape in array ="+totalArea);
+    }
+}
+```
+### Output
+```
+Shape fill color=[0, 0, 0]line color=[0, 0, 0]: Circle , Radius=10.0, Diameter=20.0, Area=314.1592653589793, Perimeter=62.83185307179586
+Shape fill color=[0, 0, 0]line color=[0, 0, 0]: Rectangle , width=10.0,height=20.0, Diagonal=22.360679774997898, Area=200.0, Perimeter=60.0
+Shape fill color=[0, 0, 0]line color=[0, 0, 0]: Triangle , side1=10.0,side2=10.0,side3=10.0, Area=43.30127018922193, Perimeter=30.0
+array
+Shape fill color=[35, 255, 0]line color=[35, 255, 0]: Circle , Radius=15.0, Diameter=30.0, Area=706.8583470577034, Perimeter=94.24777960769379
+Shape fill color=[0, 25, 255]line color=[0, 25, 255]: Rectangle , width=15.0,height=3.0, Diagonal=15.297058540778355, Area=45.0, Perimeter=36.0
+Shape fill color=[0, 10, 20]line color=[0, 10, 20]: Triangle , side1=3.0,side2=4.0,side3=5.0, Area=6.0, Perimeter=12.0
+Tital area of shape in array =757.8583470577034
+```
