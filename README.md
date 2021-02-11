@@ -7,25 +7,31 @@
 <a name="toc"></a>
 ## สารบัญ 
 * <a href="#move01">ก้าวที่ 1 Class-object และการใช้งาน</a> <br>
+กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/3ec7b1959f99adc484c6c0e25ed9461061f39b9c
 
 * <a href="#move02">ก้าวที่ 2 การตรวจสอบเพื่อป้องกันความผิดพลาดจากการใช้งาน </a><br>
+กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/161a52b491e815b75b466a4fc9bd883bad259acc
 
 * <a href="#move03">ก้าวที่ 3 เพิ่ม class Rectangle </a><br>
+กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/06a16d6fb453f608e66089ff5606d0394280e80f
 
 * <a href="#move04">ก้าวที่ 4 สืบทอด(Inheritance) ลดความซ้ำซ้อน </a><br>
+กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/792cb9846adb08df8b803ded9ef2681b7e0b1dec
 
 * <a href="#move05">ก้าวที่ 5 เพิ่ม Triangle </a><br>
+กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/5eee303c25b119d3c625c8c7bcafad4078195714
 
 * <a href="#move06">ก้าวที่ 6 เพิ่มความสามารถ และป้องกันการแก้ไข </a><br>
+กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba4c86ffc39
 
 * <a href="#move07">ก้าวที่ 7 Abstract class เติมเต็มส่วนที่ขาดและติดปีก Polymorphism </a><br>
-
+code ปัจจุบันเป็นก้าวที่ 7 แล้ว
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
