@@ -1,15 +1,11 @@
+package model.shape;
 
 public class Circle extends Shape{
 
     private double radius;
 
-    public Circle(double radius, int[] bgColor) {
-        super(bgColor);
-        this.setRadius(radius);
-    }
-    
     public Circle(double radius) {
-        this(radius,new int[]{0,0,0});
+        this.setRadius(radius);
     }
 
     public double getRadius() {return this.radius;}

@@ -1,4 +1,10 @@
 
+import model.color.Color;
+import model.shape.Circle;
+import model.shape.Rectangle;
+import model.shape.Triangle;
+import model.shape.Shape;
+
 public class Test {
 
     public static void main(String[] args) {
@@ -14,9 +20,11 @@ public class Test {
         System.out.println("array");
 
         Shape[] shapes = new Shape[3];
-        shapes[0] = new Circle(15,new int[]{35,700,-3});
-        shapes[1] = new Rectangle(15,3,new int[]{-10,25,600});
-        shapes[2] = new Triangle(3,4,5,new int[]{-10,10,20});
+        shapes[0] = new Circle(15);
+        shapes[0].setColor(new Color(35,700,-3));
+        shapes[1] = new Rectangle(15,3);
+        shapes[1].setColor(Color.GREEN);
+        shapes[2] = new Triangle(3,4,5);
         
         for(int i=0;i<3;i++){
             System.out.println(shapes[i].toString());

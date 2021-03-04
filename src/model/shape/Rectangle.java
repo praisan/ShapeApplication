@@ -1,18 +1,15 @@
+package model.shape;
 
 public class Rectangle extends Shape {
 
     private double width;
     private double height;
 
-    public Rectangle(double width, double height, int[] bgColor) {
-        super(bgColor);
+    public Rectangle(double width, double height) {
         this.setWidth(width);
         this.setHeight(height);
     }
-    
-    public Rectangle(double width, double height) {
-        this(width,height,new int[]{0,0,0});
-    }
+
 
     public double getWidth() {return width;}
 

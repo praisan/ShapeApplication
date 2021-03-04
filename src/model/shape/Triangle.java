@@ -1,16 +1,13 @@
+package model.shape;
 
 public class Triangle extends Shape {
     private double side1,side2,side3;
 
-    public Triangle(double side1, double side2, double side3, int[] bgColor) {
-        super(bgColor);
+    public Triangle(double side1, double side2, double side3) {
         this.side1 = side1;
         this.side2 = side2;
         this.side3 = side3;
     }
-    public Triangle(double side1, double side2, double side3) {
-        this(side1,  side2,  side3,new int[]{0,0,0});
-    }  
 
     public double getSide1() {return side1;}
     public double getSide2() {return side2;}
