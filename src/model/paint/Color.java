@@ -1,4 +1,4 @@
-package model.color;
+package model.paint;
 
 public final class Color extends Paint {
     
@@ -44,10 +44,10 @@ public final class Color extends Paint {
         return color;
     }
     
-    public void setColor(int r, int g, int b) {
-        red = checkColor(r);
-        green = checkColor(g);
-        blue = checkColor(b);
+    public void setColor(int red, int green, int blue) {
+        red = checkColor(red);
+        green = checkColor(green);
+        blue = checkColor(blue);
     }
     
     @Override

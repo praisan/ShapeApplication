@@ -1,4 +1,4 @@
-package model.color;
+package model.paint;
 
 public abstract class Paint {
     private double opacity;

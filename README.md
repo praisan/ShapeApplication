@@ -31,7 +31,11 @@ https://github.com/praisan/ShapeApplication/tree/5eee303c25b119d3c625c8c7bcafad4
 https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba4c86ffc39
 
 * <a href="#move07">ก้าวที่ 7 Abstract class เติมเต็มส่วนที่ขาดและติดปีก Polymorphism </a><br>
-code ปัจจุบันเป็นก้าวที่ 7 แล้ว
+กลับไปดู code ณ เวลานั้นได้ที่นี่
+https://github.com/praisan/ShapeApplication/tree/0f3a25e2241b1a9d3cca4453c5f7e205c278f921
+
+* <a href="#move08">ก้าวที่ 8 Move 08 "composition over inheritance" and "responsibility"</a><br>
+code ปัจจุบันเป็นก้าวที่ 8 แล้ว
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
@@ -771,6 +775,8 @@ public class Shape {
 <a href="#toc">[กลับสารบัญ]</a>
 ## ก้าวที่ 7 Abstract class เติมเต็มส่วนที่ขาดและติดปีก Polymorphism 
 
+https://github.com/praisan/ShapeApplication/tree/0f3a25e2241b1a9d3cca4453c5f7e205c278f921
+
 ปิติพบว่าหากใช้คุณสมบัติ Polymorphism เก็บรูปร่างต่าง ๆ ไว้ด้วยกันโดยใช้ array ชนิด Shape ทำให้การทำงานค่อนข้างสะดวก แต่หากต้องการทราบพื้นที่หรือเส้นรอบรูปของรูปร่างต่าง ๆ จะต้องแปลง (cast) กลับเป็นชนิดที่ถูกต้องของ object นั้น ๆ ก่อน เช่น 
 
 ```java
@@ -826,4 +832,144 @@ Shape fill color=[35, 255, 0]line color=[35, 255, 0]: Circle , Radius=15.0, Diam
 Shape fill color=[0, 25, 255]line color=[0, 25, 255]: Rectangle , width=15.0,height=3.0, Diagonal=15.297058540778355, Area=45.0, Perimeter=36.0
 Shape fill color=[0, 10, 20]line color=[0, 10, 20]: Triangle , side1=3.0,side2=4.0,side3=5.0, Area=6.0, Perimeter=12.0
 Tital area of shape in array =757.8583470577034
+```
+
+<a name="move08"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## <a href="#move07">ก้าวที่ 8 "composition over inheritance" and "responsibility"</a><br>
+
+ปิติอยากเพิ่มความยืดหยุ่นให้การกำหนดสีให้สามารถเป็นไปได้ทั้งใส่สีและใช้ภาพเป็นลวดลายได้ด้วยทั้งพื้นหลังและเส้นขอบ จึงตัดสินใจแยกการระบายสีออกมาเป็นคลาสใหม่ 
+
+* composition over inheritance <br>
+สร้าง Paint เป็นคลาสแบบ abstract จัดการเรื่องความโปร่งใสของการระบาย มีคลาสลูก Color สำหรับการจดจำและจัดการการระบายสีแบบ RGB และคลาสลูก ImagePattern สำหรับการจดจำและจัดการภาพที่จะใช้แทนการระบายสี การออกแบบนี้ยังช่วยให้เกิดความสะดวกในการประกาศชนิด attribute ที่มีความสามารถเป็นได้หลายรูป (Polymorphism) ในการระบายสีโดยประกาศเป็นชนิด Paint และกลายเป็นองค์ประกอบ (composition) หนึ่งของ Shape ที่รับผิดชอบในการระบายสีโดยเฉพาะแทนที่แบบเดิมที่การจัดการด้วยตัวเองแล้วให้คลาสลูกสืบทอด (inherit) การจัดการนี้ ตามแนวคิดของการออกแบบ "composition over inheritance"
+
+* responsibility <br>
+การเปลี่ยนแปลงนี้ทำให้ต้องแก้ไขคลาสลูกของ Shape ทุกคลาสเนื่องจากในคลาสเหล่านั้นมีเมดธอดหรือการดำเนินการบางอย่างเกี่ยวข้องกับการระบายสีด้วยซึ่งพบใน constructor ของแต่ละคลาส จึงทำให้ปิติต้องไต่ตรองการออกแบบใหม่โดยคำนึงถึงความรับผิดชอบ (responsibility) ของแต่ละคลาส หากแต่ละคลาสมีการจัดการกับ attribute ของคลาสอื่นด้วยเมื่อไหร่ก็ตามที่มีการเปลี่ยนแปลงในคลาสที่ประกาศ attribute เหล่านั้นก็จะมีผลกระทบต่อเนื่องโยงกันไปหมด ปิติออกแบบ Shape, Circle, Rectangle, และ Triangle ใหม่เพื่อหลีกเลี่ยงปัญหานี้โดยพยายามให้แต่ละคลาสมีเมดธอดที่จัดการกับ attribute ของด้วเองเท่านั้น
+
+* การจัดการอื่น ๆ 
+  * เพิ่มสีที่ใช้งานบ่อยในคลาส Color เพื่อให้สะดวกในการใช้งานโดยไม่ต้องจำค่าสีเหล่านั้นโดยใช้ชื่อและรหัสสีจาก https://en.wikipedia.org/wiki/Web_colors สีเหล่านี้ถูกกำหนดไว้เป็นค่าคงที่แบบ static ในคลาส Color และสามารถเรียกใช้ได้ง่ายเช่น ```Color.BLUE``` จะมีค่าเท่ากับ ```new Color(0,0,255)``` เป็นต้น
+  * แยก Package ออกเป็นสองส่วน model.paint และ model.shape เพื่อการแบ่งแยกคลาสที่ทำงานเกี่ยวข้องกันไว้ด้วยด้วยกันจะได้ปรับปรุงและแก้ไขง่ายจึ้นเมื่อคลาสมีจำนวนมากขึ้นในอนาคต
+```bash
+├── ShapeApplication
+│   ├── <default package>
+│   │   ├── Test.java
+│   ├── model.paint
+│   │   ├── Paint.java
+│   │   ├── Color.java
+│   │   ├── ImagePattern.java
+│   ├── model.shape
+│   │   ├── Shape.java
+│   │   ├── Circle.java
+│   │   ├── Rectangle.java
+│   │   ├── Triangle.java
+```
+
+คลาสใหม่
+
+```
+Paint<-Color 
+Paint<-ImagePattern 
+```
+<table>
+<thead>
+  <tr>
+    <th >Paint</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>
+      -opacity: double</td>
+  </tr>
+  <tr>
+    <td>
+      +getOpacity():double<br>
+      +setOpacity(opacity: double):void<br>
+      +isOpaque(): boolean
+      +toString():String
+    </td>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th >Color</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>-red:int<br>
+        -green:int<br>
+        -blue:int<br>
+        +static WHITE: Color<br>
+        +static BLACK: Color
+    </td>
+  </tr>
+  <tr>
+    <td>
+      +Color(red: int, green: int, blue: int)<br>
+      +getBrightness():double<br>
+      -checkColor(color int):int<br> 
+      +setColor(red: int, green: int, blue: int)<br>
+      +getRed():int<br>
+      +getGreen():int<br>
+      +getBlue():int<br>
+      +getColor():int[]<br>
+      +toString():String
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th >ImagePattern</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>
+      -imagePath:String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      +ImagePattern(imagePath:String)<br>
+      +getImagePath():String<br>
+      +getHeight():double<br>
+      +setImagePath(imagePath:String):void<br>
+      +toString():String
+    </td>
+</tbody>
+</table>
+
+
+เปลี่ยนแปลงที่คลาส Shape ยกหน้าที่ในการจัดการสีให้ Paint แล้วเอา Paint มาเป็นองค์ประกอบของตัวเองเหมือน attribute ทั่วไป 
+```java
+public abstract class Shape {
+    private Paint bgPaint;
+    private Paint linePaint;
+
+    public Shape() {
+        this.bgPaint=Color.WHITE;
+        this.linePaint=Color.BLACK;
+    }
+    
+```
+เปลี่ยนแปลงที่คลาสลูกของ Shape ไม่ให้มีส่วนเกี่ยวข้องกับสี
+
+```public Circle(double radius```~~, int[] color~~```){```<br>
+```  ```~~super(color);~~<br>```  this.setRadius(radius);```<br>```}```
+
+การเปลี่ยนแปลงการใชงานที่ Test.java จะต้องกำหนดสีใหม่หากไม่เป็นไปตามค่าเริ่มต้น
+
+```java
+        Shape[] shapes = new Shape[3];
+        shapes[0] = new Circle(15);
+        shapes[0].setColor(new Color(35,700,-3));
+        shapes[1] = new Rectangle(15,3);
+        shapes[1].setColor(Color.GREEN);
+        shapes[2] = new Triangle(3,4,5);
 ```

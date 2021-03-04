@@ -1,5 +1,5 @@
 
-import model.color.Color;
+import model.paint.Color;
 import model.shape.Circle;
 import model.shape.Rectangle;
 import model.shape.Triangle;

@@ -1,4 +1,4 @@
-package model.color;
+package model.paint;
 
 public final class ImagePattern extends Paint{
     private String imagePath;

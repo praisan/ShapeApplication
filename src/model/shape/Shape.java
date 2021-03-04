@@ -1,8 +1,7 @@
 package model.shape;
 
-import model.color.Color;
-import model.color.Paint;
-
+import model.paint.Color;
+import model.paint.Paint;
 
 public abstract class Shape {
     private Paint bgPaint;
@@ -26,7 +25,6 @@ public abstract class Shape {
         if(bgPaint==null) return;
         this.bgPaint = bgPaint;
     }
-    
     
     public final void setLineColor(Paint linePaint) {
         if(bgPaint==null) return;
