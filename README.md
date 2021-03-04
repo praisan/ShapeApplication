@@ -874,6 +874,32 @@ Paint<-ImagePattern
 </tbody>
 </table>
 
+```java
+package model.paint;
+
+public abstract class Paint {
+    private double opacity;
+
+    public double getOpacity() {
+        return opacity;
+    }
+
+    public void setOpacity(double opacity) {
+        this.opacity = opacity;
+    }
+    
+    public boolean isOpaque(){return opacity>0;};
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Paint{opacity=").append(opacity);
+        sb.append("} ");
+        return sb.toString();
+    } 
+}
+```
+
 <table>
 <thead>
   <tr>
@@ -905,6 +931,61 @@ Paint<-ImagePattern
 </tbody>
 </table>
 
+```java
+package model.paint;
+
+public final class Color extends Paint {
+    
+    // https://en.wikipedia.org/wiki/Web_colors
+    public static final Color WHITE=new Color(255,255,255);
+    public static final Color SILVER=new Color(192,192,192);
+    public static final Color GRAY=new Color(128,128,128);
+    public static final Color BLACK=new Color(0,0,0);
+    //:
+    
+    private int red;
+    private int green;
+    private int blue;
+
+    public Color(int red, int green, int blue) {
+        this.setColor(red,green,blue);
+    }
+
+    public double getBrightness() {
+        return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+    }
+
+    public int getRed() {return red;}
+    public int getGreen() {return green;}
+    public int getBlue() {return blue;}
+
+    public int[] getColor(){ return new int[]{red,green,blue}; }
+
+    private int checkColor(int color) {
+        color = (color >= 0) ? color : 0;
+        color = (color <= 255) ? color : 255;
+        return color;
+    }
+    
+    public void setColor(int red, int green, int blue) {
+        red = checkColor(red);
+        green = checkColor(green);
+        blue = checkColor(blue);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append("Color [R,G,B]=[").append(red);
+        sb.append(",").append(green);
+        sb.append(",").append(blue);
+        sb.append("]");
+        return sb.toString();
+    }
+}
+```
+
 <table>
 <thead>
   <tr>
@@ -928,11 +1009,44 @@ Paint<-ImagePattern
 </tbody>
 </table>
 
+```java
+package model.paint;
+
+public final class ImagePattern extends Paint{
+    private String imagePath;
+
+    public ImagePattern(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() { return imagePath;  }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append("ImagePattern{imagePath=").append(imagePath);
+        sb.append("} ");
+        return sb.toString();
+    }  
+}
+```
+
 ### Responsibility 
 การเปลี่ยนแปลงก่อนหน้าทำให้ต้องแก้ไขคลาสลูกของ Shape ทุกคลาสเนื่องจากในคลาสเหล่านั้นมีเมดธอดหรือการดำเนินการบางอย่างเกี่ยวข้องกับการระบายสีด้วยซึ่งพบใน constructor ของแต่ละคลาส จึงทำให้ปิติต้องไต่ตรองการออกแบบใหม่โดยคำนึงถึงความรับผิดชอบ (responsibility) ของแต่ละคลาส หากแต่ละคลาสมีการจัดการกับ attribute ของคลาสอื่นด้วยเมื่อไหร่ก็ตามที่มีการเปลี่ยนแปลงในคลาสที่ประกาศ attribute เหล่านั้นก็จะมีผลกระทบต่อเนื่องโยงกันไปหมด ปิติออกแบบ Shape, Circle, Rectangle, และ Triangle ใหม่เพื่อหลีกเลี่ยงปัญหานี้โดยพยายามให้แต่ละคลาสมีเมดธอดที่จัดการกับ attribute ของด้วเองเท่านั้น
 
 เปลี่ยนแปลงที่คลาส Shape ยกหน้าที่ในการจัดการสีให้ Paint แล้วเอา Paint มาเป็นองค์ประกอบของตัวเองเหมือน attribute ทั่วไป กำหนดพื้นหลังเริ่มต้นเป็นสีขาวและเส้นขอบสีดำ 
+
 ```java
+package model.shape;
+
+import model.paint.Color;
+import model.paint.Paint;
+
 public abstract class Shape {
     private Paint bgPaint;
     private Paint linePaint;
@@ -941,12 +1055,85 @@ public abstract class Shape {
         this.bgPaint=Color.WHITE;
         this.linePaint=Color.BLACK;
     }
-    //
+    
+    public Paint getBgColor() {return this.bgPaint;}
+    public Paint getLineColor() {return this.linePaint;}
+    
+    public final void setColor(Paint paint) {
+        if(paint==null) return;
+        this.bgPaint = paint;
+        this.linePaint=paint;
+    }
+    
+    public final void setBgColor(Paint bgPaint) {
+        if(bgPaint==null) return;
+        this.bgPaint = bgPaint;
+    }
+    
+    public final void setLineColor(Paint linePaint) {
+        if(bgPaint==null) return;
+        this.linePaint = linePaint;
+    }
+    public abstract double getArea();
+    public abstract double getPerimeter();
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Shape ");
+        sb.append("fill color=").append(this.bgPaint);
+        sb.append(", line color=").append(this.linePaint);
+        return sb.toString();
+    }
+}
 ```
 เปลี่ยนแปลงที่คลาสลูกของ Shape ไม่ให้มีส่วนเกี่ยวข้องกับสี
 
 ```public Circle(double radius```~~, int[] color~~```){```<br>
 ```  ```~~super(color);~~<br>```  this.setRadius(radius);```<br>```}```
+
+```java
+package model.shape;
+
+public class Circle extends Shape{
+
+    private double radius;
+
+    public Circle(double radius) {
+        this.setRadius(radius);
+    }
+
+    public double getRadius() {return this.radius;}
+
+    public void setRadius(double radius) {
+        if(radius<0) return;
+        this.radius = radius;
+    }
+
+    public double getDiameter() {
+        return this.radius * 2;
+    }
+
+    public double getArea() {
+        return Math.PI * this.radius * this.radius;
+    }
+
+    public double getPerimeter() {
+        return 2 * Math.PI * this.radius;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append(": Circle , Radius=").append(this.radius);
+        sb.append(", Diameter=").append(this.getDiameter());
+        sb.append(", Area=").append(this.getArea());
+        sb.append(", Perimeter=").append(this.getPerimeter());
+        return sb.toString();
+    }
+}
+```
 
 ### การจัดการอื่น ๆ 
 * เพิ่มสีที่ใช้งานบ่อยในคลาส Color เพื่อให้สะดวกในการใช้งานโดยไม่ต้องจำค่าสีเหล่านั้นโดยใช้ชื่อและรหัสสีจาก https://en.wikipedia.org/wiki/Web_colors สีเหล่านี้ถูกกำหนดไว้เป็นค่าคงที่แบบ static ในคลาส Color และสามารถเรียกใช้ได้ง่ายเช่น ```Color.BLUE``` จะมีค่าเท่ากับ ```new Color(0,0,255)``` เป็นต้น
