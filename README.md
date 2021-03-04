@@ -848,7 +848,7 @@ Tital area of shape in array =757.8583470577034
 
 * การจัดการอื่น ๆ 
   * เพิ่มสีที่ใช้งานบ่อยในคลาส Color เพื่อให้สะดวกในการใช้งานโดยไม่ต้องจำค่าสีเหล่านั้นโดยใช้ชื่อและรหัสสีจาก https://en.wikipedia.org/wiki/Web_colors สีเหล่านี้ถูกกำหนดไว้เป็นค่าคงที่แบบ static ในคลาส Color และสามารถเรียกใช้ได้ง่ายเช่น ```Color.BLUE``` จะมีค่าเท่ากับ ```new Color(0,0,255)``` เป็นต้น
-  * แยก Package ออกเป็นสองส่วน model.paint และ model.shape เพื่อการแบ่งแยกคลาสที่ทำงานเกี่ยวข้องกันไว้ด้วยด้วยกันจะได้ปรับปรุงและแก้ไขง่ายจึ้นเมื่อคลาสมีจำนวนมากขึ้นในอนาคต
+  * แยก Package ออกเป็นสองส่วน model.paint และ model.shape เพื่อการแบ่งแยกคลาสที่ทำงานเกี่ยวข้องกันไว้ด้วยด้วยกันจะได้ปรับปรุงและแก้ไขง่ายขึ้นเมื่อคลาสมีจำนวนมากขึ้นในอนาคต
 ```bash
 ├── ShapeApplication
 │   ├── <default package>
@@ -885,7 +885,7 @@ Paint<-ImagePattern
     <td>
       +getOpacity():double<br>
       +setOpacity(opacity: double):void<br>
-      +isOpaque(): boolean
+      +isOpaque(): boolean<br>
       +toString():String
     </td>
 </tbody>
@@ -946,7 +946,7 @@ Paint<-ImagePattern
 </table>
 
 
-เปลี่ยนแปลงที่คลาส Shape ยกหน้าที่ในการจัดการสีให้ Paint แล้วเอา Paint มาเป็นองค์ประกอบของตัวเองเหมือน attribute ทั่วไป 
+เปลี่ยนแปลงที่คลาส Shape ยกหน้าที่ในการจัดการสีให้ Paint แล้วเอา Paint มาเป็นองค์ประกอบของตัวเองเหมือน attribute ทั่วไป กำหนดพื้นหลังเริ่มต้นเป็นสีขาวและเส้นขอบสีดำ 
 ```java
 public abstract class Shape {
     private Paint bgPaint;
@@ -956,7 +956,7 @@ public abstract class Shape {
         this.bgPaint=Color.WHITE;
         this.linePaint=Color.BLACK;
     }
-    
+    //
 ```
 เปลี่ยนแปลงที่คลาสลูกของ Shape ไม่ให้มีส่วนเกี่ยวข้องกับสี
 
