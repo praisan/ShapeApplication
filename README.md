@@ -853,6 +853,56 @@ Tital area of shape in array =757.8583470577034
 Paint<-Color 
 Paint<-ImagePattern 
 ```
+
+เปลี่ยนแปลงที่คลาส Shape ยกหน้าที่ในการจัดการสีให้ Paint แล้วเอา Paint มาเป็นองค์ประกอบของตัวเองเหมือน attribute ทั่วไป กำหนดพื้นหลังเริ่มต้นเป็นสีขาวและเส้นขอบสีดำ 
+
+```java
+package model.shape;
+
+import model.paint.Color;
+import model.paint.Paint;
+
+public abstract class Shape {
+    private Paint bgPaint;
+    private Paint linePaint;
+
+    public Shape() {
+        this.bgPaint=Color.WHITE;
+        this.linePaint=Color.BLACK;
+    }
+    
+    public Paint getBgColor() {return this.bgPaint;}
+    public Paint getLineColor() {return this.linePaint;}
+    
+    public final void setColor(Paint paint) {
+        if(paint==null) return;
+        this.bgPaint = paint;
+        this.linePaint=paint;
+    }
+    
+    public final void setBgColor(Paint bgPaint) {
+        if(bgPaint==null) return;
+        this.bgPaint = bgPaint;
+    }
+    
+    public final void setLineColor(Paint linePaint) {
+        if(bgPaint==null) return;
+        this.linePaint = linePaint;
+    }
+    public abstract double getArea();
+    public abstract double getPerimeter();
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Shape ");
+        sb.append("fill color=").append(this.bgPaint);
+        sb.append(", line color=").append(this.linePaint);
+        return sb.toString();
+    }
+}
+```
+คลาสใหม่
 <table>
 <thead>
   <tr>
@@ -1039,55 +1089,7 @@ public final class ImagePattern extends Paint{
 ### Responsibility 
 การเปลี่ยนแปลงก่อนหน้าทำให้ต้องแก้ไขคลาสลูกของ Shape ทุกคลาสเนื่องจากในคลาสเหล่านั้นมีเมดธอดหรือการดำเนินการบางอย่างเกี่ยวข้องกับการระบายสีด้วยซึ่งพบใน constructor ของแต่ละคลาส จึงทำให้ปิติต้องไต่ตรองการออกแบบใหม่โดยคำนึงถึงความรับผิดชอบ (responsibility) ของแต่ละคลาส หากแต่ละคลาสมีการจัดการกับ attribute ของคลาสอื่นด้วยเมื่อไหร่ก็ตามที่มีการเปลี่ยนแปลงในคลาสที่ประกาศ attribute เหล่านั้นก็จะมีผลกระทบต่อเนื่องโยงกันไปหมด ปิติออกแบบ Shape, Circle, Rectangle, และ Triangle ใหม่เพื่อหลีกเลี่ยงปัญหานี้โดยพยายามให้แต่ละคลาสมีเมดธอดที่จัดการกับ attribute ของด้วเองเท่านั้น
 
-เปลี่ยนแปลงที่คลาส Shape ยกหน้าที่ในการจัดการสีให้ Paint แล้วเอา Paint มาเป็นองค์ประกอบของตัวเองเหมือน attribute ทั่วไป กำหนดพื้นหลังเริ่มต้นเป็นสีขาวและเส้นขอบสีดำ 
-
-```java
-package model.shape;
-
-import model.paint.Color;
-import model.paint.Paint;
-
-public abstract class Shape {
-    private Paint bgPaint;
-    private Paint linePaint;
-
-    public Shape() {
-        this.bgPaint=Color.WHITE;
-        this.linePaint=Color.BLACK;
-    }
-    
-    public Paint getBgColor() {return this.bgPaint;}
-    public Paint getLineColor() {return this.linePaint;}
-    
-    public final void setColor(Paint paint) {
-        if(paint==null) return;
-        this.bgPaint = paint;
-        this.linePaint=paint;
-    }
-    
-    public final void setBgColor(Paint bgPaint) {
-        if(bgPaint==null) return;
-        this.bgPaint = bgPaint;
-    }
-    
-    public final void setLineColor(Paint linePaint) {
-        if(bgPaint==null) return;
-        this.linePaint = linePaint;
-    }
-    public abstract double getArea();
-    public abstract double getPerimeter();
-    
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Shape ");
-        sb.append("fill color=").append(this.bgPaint);
-        sb.append(", line color=").append(this.linePaint);
-        return sb.toString();
-    }
-}
-```
-เปลี่ยนแปลงที่คลาสลูกของ Shape ไม่ให้มีส่วนเกี่ยวข้องกับสี
+ตัวอย่างของเปลี่ยนแปลงที่คลาสลูกของ Shape ไม่ให้มีส่วนเกี่ยวข้องกับสี
 
 ```public Circle(double radius```~~, int[] color~~```){```<br>
 ```  ```~~super(color);~~<br>```  this.setRadius(radius);```<br>```}```
