@@ -34,7 +34,7 @@ https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba
 กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/0f3a25e2241b1a9d3cca4453c5f7e205c278f921
 
-* <a href="#move08">ก้าวที่ 8 Move 08 "composition over inheritance" and "responsibility"</a><br>
+* <a href="#move08">ก้าวที่ 8 "composition over inheritance" and "responsibility"</a><br>
 code ปัจจุบันเป็นก้าวที่ 8 แล้ว
 
 <a name="move01"></a>
