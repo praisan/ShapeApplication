@@ -23,7 +23,7 @@ public class Test {
         shapes[0] = new Circle(15);
         shapes[0].setColor(new Color(35,700,-3));
         shapes[1] = new Rectangle(15,3);
-        shapes[1].setColor(Color.GREEN);
+        shapes[1].setColor(new Color(0,255,0));
         shapes[2] = new Triangle(3,4,5);
         
         for(int i=0;i<3;i++){

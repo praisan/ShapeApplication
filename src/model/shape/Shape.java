@@ -8,8 +8,8 @@ public abstract class Shape {
     private Paint linePaint;
 
     public Shape() {
-        this.bgPaint=Color.WHITE;
-        this.linePaint=Color.BLACK;
+        this.bgPaint=new Color(255,255,255);
+        this.linePaint=new Color(0,0,0);
     }
     
     public Paint getBgColor() {return this.bgPaint;}
