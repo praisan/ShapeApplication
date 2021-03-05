@@ -34,7 +34,7 @@ https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba
 กลับไปดู code ณ เวลานั้นได้ที่นี่
 https://github.com/praisan/ShapeApplication/tree/0f3a25e2241b1a9d3cca4453c5f7e205c278f921
 
-* <a href="#move08">ก้าวที่ 8 "composition over inheritance" and "responsibility"</a><br>
+* <a href="#move08">ก้าวที่ 8 "Favor composition over inheritance" and "Responsibility"</a><br>
 code ปัจจุบันเป็นก้าวที่ 8 แล้ว
 
 <a name="move01"></a>
@@ -836,12 +836,12 @@ Tital area of shape in array =757.8583470577034
 
 <a name="move08"></a>
 <a href="#toc">[กลับสารบัญ]</a>
-## <a href="#move07">ก้าวที่ 8 "composition over inheritance" and "responsibility"</a><br>
+## <a href="#move07">ก้าวที่ 8 "Favor composition over inheritance" and "Responsibility"</a><br>
 
 ปิติอยากเพิ่มความยืดหยุ่นให้การกำหนดสีให้สามารถเป็นไปได้ทั้งใส่สีและใช้ภาพเป็นลวดลายได้ด้วยทั้งพื้นหลังและเส้นขอบ จึงตัดสินใจแยกการระบายสีออกมาเป็นคลาสใหม่ 
 
-### Composition over Inheritance 
-การแยกการระบายสีออกมาเป็นคลาสใหม่และออกแบบการระบายต่างกันให้สืบทอดไปจากคลาสบรรพบุรุษเดียวกันจะช่วยทำให้เกิดความสะดวกในการประกาศชนิด attribute ที่มีความสามารถเป็นได้หลายรูป (Polymorphism) โดยใช้คลาสบรรพบุรุษ Paint ไปเป็นองค์ประกอบ (composition) หนึ่งของ Shape เพื่อรับผิดชอบในการระบายสีโดยเฉพาะ แทนที่แบบเดิมที่ Shape การจัดการด้วยตัวเองแล้วให้คลาสลูกสืบทอด (inherit) การจัดการนี้เป็นตามแนวคิดของการออกแบบ "composition over inheritance"
+### "Favor composition over Inheritance" design pattern
+การแยกการระบายสีออกมาเป็นคลาสใหม่และออกแบบการระบายต่างกันให้สืบทอดไปจากคลาสบรรพบุรุษเดียวกันจะช่วยทำให้เกิดความสะดวกในการประกาศชนิด attribute ที่มีความสามารถเป็นได้หลายรูป (Polymorphism) โดยใช้คลาสบรรพบุรุษ Paint ไปเป็นองค์ประกอบ (composition) หนึ่งของ Shape เพื่อรับผิดชอบในการระบายสีโดยเฉพาะ แทนที่แบบเดิมที่ Shape การจัดการด้วยตัวเองแล้วให้คลาสลูกสืบทอด (inherit) การจัดการนี้เป็นตามแนวคิดของการออกแบบที่ว่า "Favor composition over inheritance" ทำให้เกิดความสัมพันธ์ Shape "HAS-A" Paint ซึ่งมีความยืดหยุ่นขึ้นหากมีการแก้ไข ปรับเปลี่ยน หรือเพิ่มความสามารถของการระบายสี 
 
   * สร้าง Paint เป็นคลาสแบบ abstract จัดการเรื่องความโปร่งใสของการระบาย 
   * มีคลาสลูก Color สำหรับการจดจำและจัดการการระบายสีแบบ RGB 
@@ -867,8 +867,8 @@ public abstract class Shape {
     private Paint linePaint;
 
     public Shape() {
-        this.bgPaint=Color.WHITE;
-        this.linePaint=Color.BLACK;
+        this.bgPaint=new Color(255,255,255);
+        this.linePaint=new Color(0,0,0);
     }
     
     public Paint getBgColor() {return this.bgPaint;}
@@ -960,9 +960,7 @@ public abstract class Paint {
   <tr>
     <td>-red:int<br>
         -green:int<br>
-        -blue:int<br>
-        +static WHITE: Color<br>
-        +static BLACK: Color
+        -blue:int
     </td>
   </tr>
   <tr>
@@ -985,13 +983,6 @@ public abstract class Paint {
 package model.paint;
 
 public final class Color extends Paint {
-    
-    // https://en.wikipedia.org/wiki/Web_colors
-    public static final Color WHITE=new Color(255,255,255);
-    public static final Color SILVER=new Color(192,192,192);
-    public static final Color GRAY=new Color(128,128,128);
-    public static final Color BLACK=new Color(0,0,0);
-    //:
     
     private int red;
     private int green;
@@ -1138,16 +1129,8 @@ public class Circle extends Shape{
 ```
 
 ### การจัดการอื่น ๆ 
-* เพิ่มสีที่ใช้งานบ่อยในคลาส Color เพื่อให้สะดวกในการใช้งานโดยไม่ต้องจำค่าสีเหล่านั้นโดยใช้ชื่อและรหัสสีจาก https://en.wikipedia.org/wiki/Web_colors สีเหล่านี้ถูกกำหนดไว้เป็นค่าคงที่แบบ static ในคลาส Color และสามารถเรียกใช้ได้ง่ายเช่น ```Color.BLUE``` จะมีค่าเท่ากับ ```new Color(0,0,255)``` เป็นต้น
-```java
-public final class Color extends Paint {
-    public static final Color WHITE=new Color(255,255,255);
-    public static final Color BLACK=new Color(0,0,0);
-    public static final Color BLUE=new Color(0,0,255);
-    public static final Color PURPLE=new Color(128,0,128);
-    :
-```
-* แยก Package ออกเป็นสองส่วน model.paint และ model.shape เพื่อการแบ่งแยกคลาสที่ทำงานเกี่ยวข้องกันไว้ด้วยด้วยกันจะได้ปรับปรุงและแก้ไขง่ายขึ้นเมื่อคลาสมีจำนวนมากขึ้นในอนาคต
+
+แยก Package ออกเป็นสองส่วน model.paint และ model.shape เพื่อการแบ่งแยกคลาสที่ทำงานเกี่ยวข้องกันไว้ด้วยด้วยกันจะได้ปรับปรุงและแก้ไขง่ายขึ้นเมื่อคลาสมีจำนวนมากขึ้นในอนาคต
 
 ```bash
 ├── ShapeApplication
@@ -1170,6 +1153,6 @@ public final class Color extends Paint {
         shapes[0] = new Circle(15);
         shapes[0].setColor(new Color(35,700,-3));
         shapes[1] = new Rectangle(15,3);
-        shapes[1].setColor(Color.GREEN);
+        shapes[1].setColor(new Color(0,255,0));
         shapes[2] = new Triangle(3,4,5);
 ```
