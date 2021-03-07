@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import model.paint.Color;
 import model.shape.Circle;
 import model.shape.Rectangle;

@@ -49,6 +49,33 @@ public abstract class Shape implements Comparable<Shape>{
             }
         };
     }
+
+    @Override
+    public int hashCode() {
+        return (int)((this.getArea()+this.getPerimeter()/2));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Shape other = (Shape) obj;
+        if (!((Double)this.getArea()).equals(other.getArea())) {
+            return false;
+        }
+        if (!((Double)this.getPerimeter()).equals(other.getPerimeter())) {
+            return false;
+        }
+        return true;
+    }
+    
     
     @Override
     public String toString() {
