@@ -1,9 +1,11 @@
 package model.shape;
 
+import java.util.Comparator;
+import java.util.Objects;
 import model.paint.Color;
 import model.paint.Paint;
 
-public abstract class Shape {
+public abstract class Shape implements Comparable<Shape>{
     private Paint bgPaint;
     private Paint linePaint;
 
@@ -32,6 +34,21 @@ public abstract class Shape {
     }
     public abstract double getArea();
     public abstract double getPerimeter();
+
+    @Override
+    public int compareTo(Shape obj) {
+        Objects.requireNonNull(obj);
+        return Double.compare(this.getArea(), obj.getArea());
+    }
+    
+    public static Comparator<Shape> getPerimeterComparator(){
+        return new Comparator<Shape>(){
+            @Override
+            public int compare(Shape o1, Shape o2) {
+               return Double.compare(o1.getPerimeter(), o2.getPerimeter());
+            }
+        };
+    }
     
     @Override
     public String toString() {

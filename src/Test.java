@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import model.paint.Color;
 import model.shape.Circle;
 import model.shape.Rectangle;
@@ -35,5 +38,18 @@ public class Test {
             totalArea+=shapes[i].getArea();
         }
         System.out.println("Tital area of shape in array ="+totalArea);
+        
+                
+        System.out.println("array list");
+        ArrayList<Shape> shapeList = new ArrayList<>();
+        shapeList.add(new Circle(15));
+        shapeList.get(0).setColor(new Color(35,700,-3));
+        shapeList.add(new Rectangle(15,3));
+        shapeList.get(1).setColor(new Color(0,255,0));
+        shapeList.add(new Triangle(3,4,5));
+        Collections.sort(shapeList);
+        System.out.println(shapeList);
+        Collections.sort(shapeList,Shape.getPerimeterComparator());
+        System.out.println(shapeList);
     }
 }
