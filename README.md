@@ -35,7 +35,13 @@ https://github.com/praisan/ShapeApplication/tree/0ad14eb1fddcb81ecb3347c1dc4ebba
 https://github.com/praisan/ShapeApplication/tree/0f3a25e2241b1a9d3cca4453c5f7e205c278f921
 
 * <a href="#move08">ก้าวที่ 8 "Favor composition over inheritance" and "Responsibility"</a><br>
-code ปัจจุบันเป็นก้าวที่ 8 แล้ว
+กลับไปดู code ณ เวลานั้นได้ที่นี่
+https://github.com/praisan/ShapeApplication/tree/3e7d6c29a2a52896e7311858d7b030d2ad488cd0
+
+* <a href="#move09">ก้าวที่ 9 Basic Collection and interface</a><br>
+code ปัจจุบันเป็นก้าวที่ 9 แล้ว
+
+
 
 <a name="move01"></a>
 ## ก้าวที่ 1 Class-object และการใช้งาน
@@ -1156,3 +1162,11 @@ public class Circle extends Shape{
         shapes[1].setColor(new Color(0,255,0));
         shapes[2] = new Triangle(3,4,5);
 ```
+
+<a name="move09"></a>
+<a href="#toc">[กลับสารบัญ]</a>
+## <a href="#move07">ก้าวที่ 9 Basic Collection and interface</a><br>
+
+* ArrayList
+* Comparable
+* Comparator
