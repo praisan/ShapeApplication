@@ -842,7 +842,9 @@ Tital area of shape in array =757.8583470577034
 
 <a name="move08"></a>
 <a href="#toc">[กลับสารบัญ]</a>
-## <a href="#move07">ก้าวที่ 8 "Favor composition over inheritance" and "Responsibility"</a><br>
+## ก้าวที่ 8 "Favor composition over inheritance" and "Responsibility"<br>
+
+https://github.com/praisan/ShapeApplication/tree/3e7d6c29a2a52896e7311858d7b030d2ad488cd0
 
 ปิติอยากเพิ่มความยืดหยุ่นให้การกำหนดสีให้สามารถเป็นไปได้ทั้งใส่สีและใช้ภาพเป็นลวดลายได้ด้วยทั้งพื้นหลังและเส้นขอบ จึงตัดสินใจแยกการระบายสีออกมาเป็นคลาสใหม่ 
 
@@ -1165,7 +1167,7 @@ public class Circle extends Shape{
 
 <a name="move09"></a>
 <a href="#toc">[กลับสารบัญ]</a>
-## <a href="#move07">ก้าวที่ 9 Basic Collection and interface</a><br>
+## ก้าวที่ 9 Basic Collection and interface<br>
 
 * ArrayList
 * Comparable
